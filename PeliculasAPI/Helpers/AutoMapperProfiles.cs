@@ -12,7 +12,7 @@ namespace PeliculasAPI.Helpers
             CreateMap<GeneroCreacionDTO, Genero>();
 
             CreateMap<Actor,ActoresDTO>().ReverseMap();
-            CreateMap<ActoresCreacionDTO, Actor>();
+            CreateMap<ActoresCreacionDTO, Actor>().ForMember(x => x.Foto, op => op.Ignore());
         }
     }
 }
