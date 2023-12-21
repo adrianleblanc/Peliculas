@@ -22,12 +22,15 @@ namespace PeliculasAPI.Servicios
                 string directorioArchivo = Path.Combine(env.WebRootPath,contenedor,nombreArchivo);
 
                 if (File.Exists(directorioArchivo)) File.Delete(directorioArchivo);
+
             }
+            return Task.FromResult(0);
         }
 
-        public Task<string> EditarArchivo(byte[] contenido, string extencion, string contenedor, string ruta, string contentType)
+        public async Task<string> EditarArchivo(byte[] contenido, string extencion, string contenedor, string ruta, string contentType)
         {
-            throw new NotImplementedException();
+            await BorrarArchivo(ruta, contenedor);
+            return await GuardarArchivo(contenido,extencion,contenedor,contentType);
         }
 
         public async Task<string> GuardarArchivo(byte[] contenido, string extencion, string contenedor, string contentType)
