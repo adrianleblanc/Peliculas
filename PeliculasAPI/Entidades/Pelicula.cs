@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PeliculasAPI.DTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace PeliculasAPI.Entidades
 {
@@ -11,5 +12,7 @@ namespace PeliculasAPI.Entidades
         public bool EnCines { get; set; }
         public DateTime FechaEstreno { get; set; }
         public string Poster { get; set; }
+        public List<ActorPeliculaCreacionDTO> PeliculasActores { get; set; }
+        public List<PeliculasGeneros> PeliculasGeneros { get; set; }
     }
 }

@@ -100,7 +100,6 @@ namespace PeliculasAPI.Controllers
             mapper.Map(entidadDTO, entidadDB);
             await context.SaveChangesAsync();
             return NoContent();
-
         }
 
         [HttpDelete]
