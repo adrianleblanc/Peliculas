@@ -2,7 +2,7 @@
 
 namespace PeliculasAPI.Entidades
 {
-    public class Actor
+    public class Actor:IID
     {
         public int Id { get; set; }
         [Required]

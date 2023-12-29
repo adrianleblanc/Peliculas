@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using PeliculasAPI;
@@ -12,9 +13,10 @@ using PeliculasAPI;
 namespace PeliculasAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231228223405_usuarios")]
+    partial class usuarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,6 @@ namespace PeliculasAPI.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "9aae0b6d-d50c-4d0a-9b90-2a6873e3845d",
-                            ConcurrencyStamp = "f8e2f8e3-4e43-4ea3-a29b-7b50ea24b930",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -147,24 +140,6 @@ namespace PeliculasAPI.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "5673b8cf-12de-44f6-92ad-fae4a77932ad",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "27645e4c-3463-43ec-b58f-87b67ef4df14",
-                            Email = "felipe@hotmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "felipe@hotmail.com",
-                            NormalizedUserName = "felipe@hotmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBTRPxPx3QP1QYS/NknCgTDk2ivGRmb+UHJYNbm7inFoKQLhrRDDZV8ZHL6M8tGZOw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "97fe20f7-d478-41d2-a14a-ec601001dba3",
-                            TwoFactorEnabled = false,
-                            UserName = "felipe@hotmail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -190,15 +165,6 @@ namespace PeliculasAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "Admin",
-                            UserId = "5673b8cf-12de-44f6-92ad-fae4a77932ad"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -279,26 +245,6 @@ namespace PeliculasAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Actores");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 5,
-                            FechaNacimiento = new DateTime(1962, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Jim Carrey"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            FechaNacimiento = new DateTime(1965, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Robert Downey Jr."
-                        },
-                        new
-                        {
-                            Id = 7,
-                            FechaNacimiento = new DateTime(1981, 6, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Chris Evans"
-                        });
                 });
 
             modelBuilder.Entity("PeliculasAPI.Entidades.Genero", b =>
@@ -317,28 +263,6 @@ namespace PeliculasAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Generos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 4,
-                            Nombre = "Aventura"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Nombre = "Animación"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Nombre = "Suspenso"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Nombre = "Romance"
-                        });
                 });
 
             modelBuilder.Entity("PeliculasAPI.Entidades.Pelicula", b =>
@@ -366,48 +290,11 @@ namespace PeliculasAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Peliculas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            EnCines = true,
-                            FechaEstreno = new DateTime(2019, 4, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titulo = "Avengers: Endgame"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EnCines = false,
-                            FechaEstreno = new DateTime(2019, 4, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titulo = "Avengers: Infinity Wars"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            EnCines = false,
-                            FechaEstreno = new DateTime(2020, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titulo = "Sonic the Hedgehog"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            EnCines = false,
-                            FechaEstreno = new DateTime(2020, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titulo = "Emma"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            EnCines = false,
-                            FechaEstreno = new DateTime(2020, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titulo = "Wonder Woman 1984"
-                        });
                 });
 
             modelBuilder.Entity("PeliculasAPI.Entidades.PeliculasActores", b =>
                 {
-                    b.Property<int>("ActorId")
+                    b.Property<int>("ActorID")
                         .HasColumnType("int");
 
                     b.Property<int>("PeliculaId")
@@ -419,7 +306,7 @@ namespace PeliculasAPI.Migrations
                     b.Property<string>("Personaje")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ActorId", "PeliculaId");
+                    b.HasKey("ActorID", "PeliculaId");
 
                     b.HasIndex("PeliculaId");
 
@@ -451,46 +338,17 @@ namespace PeliculasAPI.Migrations
 
             modelBuilder.Entity("PeliculasAPI.Entidades.PeliculasSalasDeCine", b =>
                 {
-                    b.Property<int>("PeliculaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SalaDeCineID")
                         .HasColumnType("int");
 
-                    b.HasKey("PeliculaId", "SalaDeCineID");
-
-                    b.HasIndex("SalaDeCineID");
-
-                    b.ToTable("PeliculasSalasDeCines");
-                });
-
-            modelBuilder.Entity("PeliculasAPI.Entidades.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Comentario")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("PeliculaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Puntuacion")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
+                    b.HasKey("SalaDeCineID", "PeliculaId");
 
                     b.HasIndex("PeliculaId");
 
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Reviews");
+                    b.ToTable("PeliculasSalasDeCine");
                 });
 
             modelBuilder.Entity("PeliculasAPI.Entidades.SalaDeCine", b =>
@@ -501,43 +359,17 @@ namespace PeliculasAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Nombre")
+                    b.Property<Point>("Ubicacion")
+                        .HasColumnType("geography");
+
+                    b.Property<string>("nombre")
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
-                    b.Property<Point>("Ubicacion")
-                        .HasColumnType("geography");
-
                     b.HasKey("Id");
 
-                    b.ToTable("SalasDeCine");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "Agora",
-                            Ubicacion = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (-69.9388777 18.4839233)")
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Nombre = "Sambil",
-                            Ubicacion = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (-69.9118804 18.4826214)")
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Nombre = "Megacentro",
-                            Ubicacion = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (-69.856427 18.506934)")
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Nombre = "Village East Cinema",
-                            Ubicacion = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (-73.986227 40.730898)")
-                        });
+                    b.ToTable("SalaDeCines");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -595,7 +427,7 @@ namespace PeliculasAPI.Migrations
                 {
                     b.HasOne("PeliculasAPI.Entidades.Actor", "Actor")
                         .WithMany("PeliculasActores")
-                        .HasForeignKey("ActorId")
+                        .HasForeignKey("ActorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -642,23 +474,6 @@ namespace PeliculasAPI.Migrations
                     b.Navigation("Pelicula");
 
                     b.Navigation("SalaDeCine");
-                });
-
-            modelBuilder.Entity("PeliculasAPI.Entidades.Review", b =>
-                {
-                    b.HasOne("PeliculasAPI.Entidades.Pelicula", "Pelicula")
-                        .WithMany()
-                        .HasForeignKey("PeliculaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Pelicula");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("PeliculasAPI.Entidades.Actor", b =>
