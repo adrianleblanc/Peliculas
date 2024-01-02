@@ -14,10 +14,10 @@ namespace PeliculasAPI.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
-        private readonly AlmacenadorArchivosLocal almacenadorArchivosLocal;
+        private readonly IAlmacenadorArchivos almacenadorArchivosLocal;
         private readonly string contenedor = "actores";
 
-        public ActoresControllers(ApplicationDbContext context,IMapper mapper,AlmacenadorArchivosLocal almacenadorArchivosLocal):base(context,mapper)
+        public ActoresControllers(ApplicationDbContext context,IMapper mapper, IAlmacenadorArchivos almacenadorArchivosLocal):base(context,mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -86,7 +86,7 @@ namespace PeliculasAPI.Controllers
         }
 
         [HttpPatch("{id}")]
-        private async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<ActorDTOPatch> patchDocument)
+        public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<ActorDTOPatch> patchDocument)
         {
             return await Patch<Actor,ActorDTOPatch>(id, patchDocument);
         }

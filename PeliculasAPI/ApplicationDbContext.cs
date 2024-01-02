@@ -4,11 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using PeliculasAPI.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace PeliculasAPI
 {
@@ -24,7 +20,7 @@ namespace PeliculasAPI
                 .HasKey(x => new { x.ActorId, x.PeliculaId });
 
             modelBuilder.Entity<PeliculasGeneros>()
-                .HasKey(x => new { x.GenerosId, x.PeliculasId });
+                .HasKey(x => new { x.GeneroId, x.PeliculaId });
 
             modelBuilder.Entity<PeliculasSalasDeCine>()
                 .HasKey(x => new { x.PeliculaId, x.SalaDeCineID });

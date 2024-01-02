@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using PeliculasAPI.DTOs;
 using PeliculasAPI.Entidades;
 
 namespace PeliculasAPI.Helpers
 {
-    public class AutoMapperProfiles:Profile
+    public class AutoMapperProfiles : Profile
     {
         public AutoMapperProfiles(GeometryFactory geometryFactory)
         {
@@ -33,7 +32,7 @@ namespace PeliculasAPI.Helpers
                 .ForMember(x => x.Ubicacion, x => x.MapFrom(y =>
                 geometryFactory.CreatePoint(new Coordinate(y.Longitud, y.Latitud))));
 
-            CreateMap<Actor,ActoresDTO>().ReverseMap();
+            CreateMap<Actor, ActoresDTO>().ReverseMap();
             CreateMap<ActoresCreacionDTO, Actor>().ForMember(x => x.Foto, op => op.Ignore());
             CreateMap<ActorDTOPatch, Actor>().ReverseMap();
 
@@ -71,7 +70,7 @@ namespace PeliculasAPI.Helpers
             if (pelicula.PeliculasGeneros == null) return resultado;
             foreach (var generoPelicula in pelicula.PeliculasGeneros)
             {
-                resultado.Add(new GeneroDTO { Id = generoPelicula.GenerosId, Nombre = generoPelicula.Genero.Nombre });
+                resultado.Add(new GeneroDTO { Id = generoPelicula.GeneroId, Nombre = generoPelicula.Genero.Nombre });
             }
             return resultado;
         }
@@ -82,7 +81,7 @@ namespace PeliculasAPI.Helpers
             if (peliculaCreacionDTO == null) return resultado;
             foreach (var id in peliculaCreacionDTO.GenerosIDs)
             {
-                resultado.Add(new PeliculasGeneros() { GenerosId = id });
+                resultado.Add(new PeliculasGeneros() { GeneroId = id });
             }
             return resultado;
         }

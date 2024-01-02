@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using PeliculasAPI.DTOs;
 using PeliculasAPI.Entidades;
-using System.Diagnostics.CodeAnalysis;
 
 namespace PeliculasAPI.Controllers
 {
@@ -14,13 +12,11 @@ namespace PeliculasAPI.Controllers
     public class SalasDeCineController : CustomBaseController
     {
         private readonly ApplicationDbContext context;
-        private readonly IMapper mapper;
         private readonly GeometryFactory geometryFactory;
 
         public SalasDeCineController(ApplicationDbContext context, IMapper mapper,GeometryFactory geometryFactory) : base(context, mapper)
         {
             this.context = context;
-            this.mapper = mapper;
             this.geometryFactory = geometryFactory;
         }
 

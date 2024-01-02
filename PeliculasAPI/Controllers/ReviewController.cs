@@ -7,7 +7,6 @@ using PeliculasAPI.DTOs;
 using PeliculasAPI.Entidades;
 using PeliculasAPI.Helpers;
 using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
 
 namespace PeliculasAPI.Controllers
 {
@@ -18,7 +17,7 @@ namespace PeliculasAPI.Controllers
     {
         private readonly IMapper mapper;
         private readonly ApplicationDbContext context;
-        public ReviewController(IMapper mapper, ApplicationDbContext context):base(context,mapper)
+        public ReviewController(IMapper mapper, ApplicationDbContext context) : base(context, mapper)
         {
             this.mapper = mapper;
             this.context = context;
@@ -26,10 +25,10 @@ namespace PeliculasAPI.Controllers
 
         [HttpGet]
         public async Task<ActionResult<List<ReviewDTO>>> Get(int peliculaId, [FromQuery] PaginacionDTO paginacionDTO)
-        { 
-            var query = context.Reviews.Include(x=> x.Usuario).AsQueryable();
+        {
+            var query = context.Reviews.Include(x => x.Usuario).AsQueryable();
             query = query.Where(x => x.PeliculaId == peliculaId);
-            return await Get<Review, ReviewDTO>(paginacionDTO,query);
+            return await Get<Review, ReviewDTO>(paginacionDTO, query);
         }
 
         [HttpPost]
@@ -51,15 +50,15 @@ namespace PeliculasAPI.Controllers
 
         [HttpPut("{reviewId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult> Put (int peliculaId,int reviewId, [FromBody] ReviewCreacionDTO reviewCreacionDTO)
+        public async Task<ActionResult> Put(int peliculaId, int reviewId, [FromBody] ReviewCreacionDTO reviewCreacionDTO)
         {
             var reviewDB = await context.Reviews.FirstOrDefaultAsync(x => x.Id == reviewId);
             if (reviewDB == null) return NotFound();
 
-            var usuarioId = HttpContext.User.Claims.First(x => x.Type ==  ClaimTypes.NameIdentifier).Value;
+            var usuarioId = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
             if (reviewDB.UsuarioId != usuarioId) return BadRequest("No tiene permisos de editar este review");
 
-            reviewDB = mapper.Map(reviewCreacionDTO,reviewDB);
+            reviewDB = mapper.Map(reviewCreacionDTO, reviewDB);
             await context.SaveChangesAsync();
             return NoContent();
         }
